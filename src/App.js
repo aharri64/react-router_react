@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './Home'
+import Procedures from './Procedures'
+import Contact from './Contact'
+import Procedure from './Procedure'
+//! we get <Router /> component,  <Route /> components, <Link /> components
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+
+    <nav className='nav'>
+      <Link to='/'>Home</Link>
+      <Link to='/procedures'>Procedures</Link>
+      <Link to='/contact'>Contact</Link>
+      <Link to='/procedures/cavity'>Cavity</Link>
+    </nav>
+      
+        <Route exact path='/' component={Home} />
+        <Route exact path='/procedures' component={Procedures} />
+        <Route path='/procedures/:type' render={(props) => {
+            return <Procedure {...props} />
+          }} />
+        <Route path='/contact' component={Contact} />
+    </Router>
+      
   );
 }
 
